@@ -23,7 +23,8 @@ app.include_router(
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request, exc: ValidationError):
-    error_list = [error.get("msg") for error in exc.errors()]
+    error_list = [error for error in exc.errors()]
+    # error_list = ["{} : {}".format(error.get("loc")[-1], error.get("msg")) for error in exc.errors()]
     return JSONResponse(
         content={"errors": error_list},
         status_code=400
