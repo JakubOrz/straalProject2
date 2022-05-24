@@ -11,8 +11,8 @@ async def exchange_currency(payment: Payment) -> int:
     if currency == Currency.PLN:
         return amount
 
-    url = f"http://api.nbp.pl/api/exchangerates/rates/a/" \
+    url = f"http://api.nbp.pl/api/exchangerates/rates/c/" \
           f"{currency.lower()}/{date.strftime('%Y-%m-%d')}/?format=json"
     result = requests.get(url=url).json()
-    exchange_mid_rate = result['rates'][0]['mid']
+    exchange_mid_rate = result['rates'][0]['bid']
     return math.floor(amount * exchange_mid_rate)

@@ -1,9 +1,9 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, PlainTextResponse
 
-from routes import ClientsRouter, TestRouter
+from routes import ClientsRouter
 from pydantic import ValidationError
 
 app = FastAPI()
@@ -11,14 +11,16 @@ app = FastAPI()
 app.include_router(
     router=ClientsRouter,
     prefix="",
-    tags=['Payments']
+    tags=['Reports']
 )
 
-app.include_router(
-    router=TestRouter,
-    prefix="/testRouter",
-    tags=['tester']
-)
+
+@app.get("/")
+async def main_page():
+    """
+    For tests if server is alive
+    """
+    return PlainTextResponse(status_code=204)
 
 
 @app.exception_handler(RequestValidationError)

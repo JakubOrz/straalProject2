@@ -1,0 +1,23 @@
+{
+    "customer_id": "eadf34d45fs",
+    "report": [
+        {
+            "date": "2021-05-01T07:00:05Z",
+            "type": "card",
+            "payment_mean": "John Doe 2222*******2222",
+            "description": "REF123457",
+            "amount": 2450,
+            "currency": "PLN",
+            "amount_in_pln": 2450
+        },
+        {
+            "date": "2021-05-08T11:01:43Z",
+            "type": "pay_by_link",
+            "payment_mean": "bank",
+            "description": "Biedronka, shopping",
+            "amount": 200,
+            "currency": "PLN",
+            "amount_in_pln": 200
+        }
+    ]
+}

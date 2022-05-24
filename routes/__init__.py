@@ -1,2 +1,1 @@
-from .clients import router as ClientsRouter
-from .testRouter import router as TestRouter
+from .reports import router as ClientsRouter

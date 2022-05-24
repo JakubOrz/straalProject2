@@ -17,21 +17,6 @@ def check_missing_fields(model_fields, values: dict, error_prefix: str = "") -> 
         raise ValueError("{} missing values: {}".format(error_prefix, " ".join(missing_fields_names)))
 
 
-class TestModel(BaseModel):
-    message: str
-    code: int
-
-    @root_validator(pre=True)
-    def check_missing_fields(cls, values):
-        check_missing_fields(cls.__fields__.keys(), values, "Error in test field")
-
-    @validator('message')
-    def message_validate(cls, message):
-        if 'hey' not in message:
-            raise ValueError("You missed hey in message")
-        return message
-
-
 class Payment(BaseModel):
     created_at: datetime = Field()
     currency: Currency = Field()
@@ -76,3 +61,9 @@ class ReportRequest(BaseModel):
     pay_by_link: Optional[List[PayByLink]] = Field(alias="pay_by_link", min_items=0)
     dp: Optional[List[DirectPayment]] = Field(alias="dp", min_items=0)
     card: Optional[List[Card]] = Field(alias="card", min_items=0)
+
+
+class CustomerReportRequest(BaseModel):
+    customer_id: str = Field(min_length=1)
+    payments: 'ReportRequest' = Field()
+
