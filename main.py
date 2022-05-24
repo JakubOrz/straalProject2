@@ -20,7 +20,7 @@ async def main_page():
     """
     For tests if server is alive
     """
-    return PlainTextResponse(status_code=204)
+    return PlainTextResponse(status_code=200, content="OK")
 
 
 @app.exception_handler(RequestValidationError)
